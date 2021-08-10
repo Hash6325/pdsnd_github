@@ -16,12 +16,12 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     cities= ['chicago','new york city','washington']
     while True: # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-       
+
         city = input('choose city(chicago, new york city, washington):').lower()
-        
+
         if city not in cities:
          print('Sorry, please enter a valid input')
          continue
@@ -32,35 +32,35 @@ def get_filters():
        # continue
        #else:
        # break
-         
+
       # TO DO: get user input for month (all, january, february, ... , june)
     months = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
-    
-    while True: 
+
+    while True:
              month = input('choose month/s(all, january, february, ... , june):').lower()
-            
+
              if month not in months:
                      print('Sorry, please enter a valid input')
                      continue
              else:
                 break
-            
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     days = ['all', 'monday', 'tuesday','wednesday','thursday', 'friday','saturday', 'sunday']
-    
+
     while True:
             day = input('choose day of the week (all, monday, tuesday, ... sunday):').lower()
-            
+
             if day not in days:
                print('Sorry, please enter a valid input')
                continue
             else:
              break
- 
+
     print('-'*40)
     return city, month, day
 
-    
+
 
 def load_data(city, month, day):
     """
@@ -77,39 +77,39 @@ def load_data(city, month, day):
 
     df['Start Time'] = pd.to_datetime(df['Start Time']) # converting 'Start Time' column to datetime.
 
-    
+
     df['month'] = df['Start Time'].dt.month  # creating month column in data frame
     df['day_of_week'] = df['Start Time'].dt.weekday_name # creating day of the week column in data frame
 
 
-    
+
     if month != 'all':
-       
-        months = ['january', 'february', 'march', 'april', 'may', 'june', 
+
+        months = ['january', 'february', 'march', 'april', 'may', 'june',
                   'july','august','september','october', 'november', 'december']
         month = months.index(month) + 1
-    
-       
+
+
         df = df[df['month'] == month]
 
-    
+
     if day != 'all':
-       
+
         df = df[df['day_of_week'] == day.title() ]
-   
+
 
     return df
 # a function used in some of the other functions that creates a new hour column without actually altering the original data frame
-def hour_column(df): 
+def hour_column(df):
     df['hour'] = df['Start Time'].dt.hour
     return df
-    
+
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-    
+
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
 # extract hour from the Start Time column to create an hour column
@@ -123,7 +123,7 @@ def time_stats(df):
 
     # TO DO: display the most common start hour
     common_hour = df['hour'].mode()[0]
-    
+
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october','november','december']
     print('The most common month is', months[common_month-1])
     print('The most common day of the week is', common_dayOfWeek)
@@ -148,7 +148,7 @@ def station_stats(df):
     df['stations'] = '"' + df['Start Station'] + '"' + ' and ' +  '"' +df['End Station'] + '"'
     comb_EndStart =  df['stations'].value_counts().index[0]
     print('Most frequent combination of start station and end station trip :',comb_EndStart)
-    
+
     print("\nThis took %s seconds." % round((time.time() - start_time),2))
     print('-'*40)
 
@@ -180,7 +180,7 @@ def user_stats(df):
      user_types_count = df['User Type'].value_counts()
      print(user_types_count)
     else:
-        print('No user type data found') 
+        print('No user type data found')
     # TO DO: Display counts of gender
     if 'Gender' in df.columns :# The 'Gender' column is not found in all data files so this if statment checks if the file contains the column before proceeding.
       gender_count = df['Gender'].value_counts()
@@ -195,20 +195,20 @@ def user_stats(df):
      print('The most recent year of birth is :', int(most_recent))
      most_common = df['Birth Year'].value_counts().index[0]
      print('The most common year of birth is :', int(most_common))
-    else: 
+    else:
         print('No birth year data found')
-        
+
     print("\nThis took %s seconds." % round((time.time() - start_time),2))
-    
+
     print('-'*40)
 
 def display_raw_data(df):
-    """ Your docstring here """
+    """ Displays raw data in an interactive matter in ther terminal to present statistics """
     i = 0
     raw = input("Would you like to display raw data in an interactive manner? (yes or no)").lower() # TO DO: convert the user input to lower case using lower() function
     pd.set_option('display.max_columns',200)
 
-    while True:            
+    while True:
         if raw == 'no':
             break
         elif raw == 'yes':
@@ -216,7 +216,7 @@ def display_raw_data(df):
             raw = input("Would you like to display raw data in an interactive manner? (yes or no)").lower() # TO DO: convert the user input to lower case using lower() function
             i += 5
         else:
-            raw = input("\nYour input is invalid. Please enter only 'yes' or 'no'\n").lower()    
+            raw = input("\nYour input is invalid. Please enter only 'yes' or 'no'\n").lower()
 
 def main():
     while True:
