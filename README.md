@@ -5,7 +5,7 @@
 
 ### Project Title
 Explore US Bikeshare Data
-by Hashem Alsimail
+by Hashem Alismail
 
 ### Description
 Exploring data related to bike share systems for three major cities in the United States—Chicago, New York City, and Washington using python. Data is used to answer interesting questions about it by computing descriptive statistics. Also takes raw input to create an interactive experience in the terminal to present statistics.
