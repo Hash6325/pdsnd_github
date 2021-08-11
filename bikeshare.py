@@ -23,10 +23,10 @@ def get_filters():
         city = input('choose city(chicago, new york city, washington):').lower()
 
         if city not in cities:
-         print('Sorry, please enter a valid input')
-         continue
+            print('Sorry, please enter a valid input')
+            continue
         else:
-         break
+            break
        #except ValueError:
         #print('Sorry, please enter a valid input')
        # continue
@@ -52,10 +52,10 @@ def get_filters():
             day = input('choose day of the week (all, monday, tuesday, ... sunday):').lower()
 
             if day not in days:
-               print('Sorry, please enter a valid input')
-               continue
+                print('Sorry, please enter a valid input')
+                continue
             else:
-             break
+                break
 
     print('-'*40)
     return city, month, day
@@ -88,13 +88,10 @@ def load_data(city, month, day):
         months = ['january', 'february', 'march', 'april', 'may', 'june',
                   'july','august','september','october', 'november', 'december']
         month = months.index(month) + 1
-
-
         df = df[df['month'] == month]
 
 
     if day != 'all':
-
         df = df[df['day_of_week'] == day.title() ]
 
 
@@ -177,24 +174,24 @@ def user_stats(df):
 
     # TO DO: Display counts of user types
     if 'User Type' in df.columns : # The 'User Type' column is not found in all data files so this if statment checks if the file contains the column before proceeding.
-     user_types_count = df['User Type'].value_counts()
-     print(user_types_count)
+        user_types_count = df['User Type'].value_counts()
+        print(user_types_count)
     else:
         print('No user type data found')
     # TO DO: Display counts of gender
     if 'Gender' in df.columns :# The 'Gender' column is not found in all data files so this if statment checks if the file contains the column before proceeding.
-      gender_count = df['Gender'].value_counts()
-      print(gender_count)
+        gender_count = df['Gender'].value_counts()
+        print(gender_count)
     else:
         print('No gender data found')
     # TO DO: Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns :# The 'Birth Year' column is not found in all data files so this if statment checks if the file contains the column before proceeding.
-     earliest_birth = df['Birth Year'].min()
-     print('The earliest year of birth is :', int(earliest_birth))
-     most_recent = df['Birth Year'].max()
-     print('The most recent year of birth is :', int(most_recent))
-     most_common = df['Birth Year'].value_counts().index[0]
-     print('The most common year of birth is :', int(most_common))
+        earliest_birth = df['Birth Year'].min()
+        print('The earliest year of birth is :', int(earliest_birth))
+        most_recent = df['Birth Year'].max()
+        print('The most recent year of birth is :', int(most_recent))
+        most_common = df['Birth Year'].value_counts().index[0]
+        print('The most common year of birth is :', int(most_common))
     else:
         print('No birth year data found')
 
